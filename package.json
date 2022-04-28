@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.27.1",
+    "cloudinary": "^1.29.1",
+    "dotenv": "^16.0.0",
     "next": "12.1.5",
     "react": "18.0.0",
     "react-dom": "18.0.0"
