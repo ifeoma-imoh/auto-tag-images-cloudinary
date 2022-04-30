@@ -8,15 +8,17 @@ export default function Home() {
   const [imageTags, setImageTags] = useState([]);
 
   useEffect(() => {
-    (async function getCldImageTags() {
+    async function getCldImageTags() {
       try {
         const cldTags = await axios.get("/api/getImageTags");
         setImageTags(cldTags.data.tags);
       } catch (error) {
         console.log("tags" + error);
       }
-    })();
+    };
+    getCldImageTags()
     getAllImages();
+  
   }, []);
 
   async function getAllImages() {
@@ -36,9 +38,8 @@ export default function Home() {
     };
   };
 
-  const handleOnFormSubmit = (event) => {
+  const handleOnFormSubmit = async (event) => {
     event.preventDefault();
-    (async function uploadImage() {
       try {
         const response = await axios.post("/api/uploadImage", {
           image: JSON.stringify(image),
@@ -47,11 +48,11 @@ export default function Home() {
       } catch (error) {
         console.log("imageUpload" + error);
       }
-    })();
+    
   };
 
-  const handleTagClick = (tag) => {
-    (async () => {
+  const handleTagClick = async (tag) => {
+   
       try {
         const resImages = await axios.post("/api/getImagesByTag", {
           tag: JSON.stringify({
@@ -62,7 +63,7 @@ export default function Home() {
       } catch (error) {
         console.log("tagClick" + error);
       }
-    })();
+   
   };
 
   return (
