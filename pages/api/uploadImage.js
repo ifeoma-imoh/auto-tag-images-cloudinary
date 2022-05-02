@@ -8,6 +8,11 @@ cloudinary.config({
   secure: true,
 });
 export default async function handler(req, res) {
+  const { method } = req;
+  if (method === "OPTIONS") {
+    return res.status(200).send("ok");
+  }
+
   const image = JSON.parse(req.body.image);
   try {
     const cldResponse = await cloudinary.uploader.upload(image, {
@@ -23,9 +28,9 @@ export default async function handler(req, res) {
 }
 
 export const config = {
-    api: {
-      bodyParser: {
-        sizeLimit: "4mb",
-      },
+  api: {
+    bodyParser: {
+      sizeLimit: "4mb",
     },
-  };
+  },
+};
